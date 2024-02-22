@@ -1,5 +1,5 @@
 # PharmDOG
-![logo](".assets/logo.png")
+![logo](.assets/logo.png)
 Pharmacogenomic decoding of genes (**PharmDOG**) is an annotation tool designed to provide comprehensive gene annotations by harnessing the information available in the [PharmGKB](https://www.pharmgkb.org/) database.
 
 ## Instalation
