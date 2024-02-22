@@ -1,14 +1,17 @@
 #! /usr/bin/env python3
 
-# Programa que permite anotar genes con información de pharmGKB
+__author__ = "Jordi Sevilla Fortuny"
+__date__ = "Wed feb 21 2024"
+__email__ = "jorsefor@alumni.uv.es"
 
+# Import modules
 from io import BytesIO
 from zipfile import ZipFile
 import requests
 import pandas as pd
 from argparse import ArgumentParser
 
-# URLs a los archivos primarios de pharmGKB que relacionan genes con enfermedades.
+# URLs to zip files from PharmGKB
 RELATIONSHIP_URL = "https://api.pharmgkb.org/v1/download/file/data/relationships.zip"
 GENES_URL = "https://api.pharmgkb.org/v1/download/file/data/genes.zip"
 
