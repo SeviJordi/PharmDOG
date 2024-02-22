@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /usr/bin/env python3
 
 # Programa que permite anotar genes con información de pharmGKB
 

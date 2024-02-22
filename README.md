@@ -13,7 +13,7 @@ sudo apt-get install python3
 ```
 # Command line interface
 
-Here is the general usage (you can view this in your command line with `python3 pharm_gene_annotator.py -h`):
+Here is the general usage (you can view this in your command line with `python3 /path/to/PharmDOG/src/pharm_gene_annotator.py -h`):
 
 ```
 usage: pharm_gene_annotator.py [-h] -i INPUT_FILE -o OUTPUT_FILE
