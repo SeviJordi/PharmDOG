@@ -11,7 +11,12 @@ In case your system lacks Python version 3.10 or newer, it is necessary to [down
 ```
 sudo apt-get install python3
 ```
-# Command line interface
+Ensure that the [requests](https://requests.readthedocs.io/en/latest/) and [pandas](https://pandas.pydata.org/) Python modules are installed. You can conveniently install them using pip by referencing the [requirements file](requirements.txt) provided in this repository:
+
+```
+pip3 install -r requirements.txt
+```
+## Command line interface
 
 Here is the general usage (you can view this in your command line with `python3 /path/to/PharmDOG/src/pharm_gene_annotator.py -h`):
 
@@ -29,3 +34,16 @@ options:
 ```
 
 The **input file** should be a text file formatted with one gene per line using gene symbol notation. The input file also supports comment lines starting with **#**.
+
+## Output
+
+The output from [pharm_gene_annotator.py](src/pharm_gene_annotator.py)  is presented as a comma-separated file (CSV) with six columns:
+
+
+
+- **Gene_symbol**: The symbol name of the queried genes.
+- **PharmGKB_id**: Identification code for the gene in the PharmGKB database.
+- **Feature**: Entity associated with the gene in the PharmGKB database.
+- **Feature_type**: Broad classification of the Feature (e.g., Disease, Chemical...).
+- **Status**: Indicates whether the Feature is associated with the gene or not.
+- **PMIDs**: Identification codes for the evidence supporting the relationship. If multiple, they are separated by ";".
