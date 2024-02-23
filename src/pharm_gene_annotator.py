@@ -73,7 +73,7 @@ def main() -> None:
   
 
     # Annotate genes
-    file_out.append("Gene Symbol,PharmGKB id,Feature,Feature type,Status,PMIDs")
+    file_out.append("Gene_Symbol,PharmGKB_id,Feature,Feature_type,Status,PMIDs")
     for gene in genes_list:
         new_line = f"{gene},"
 
