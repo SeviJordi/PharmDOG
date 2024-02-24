@@ -2,6 +2,8 @@
 ![logo](.assets/logo.png)
 Pharmacogenomic decoding of genes (**PharmDOG**) is an annotation tool designed to provide comprehensive gene annotations by harnessing the information available in the [PharmGKB](https://www.pharmgkb.org/) database.
 
+---
+
 ## Instalation
 
 You have the option to download the zipped version of this repository (find the button on the right-hand side of the screen). Utilize the `pharm_gene_annotator.py` in the `src` directory as a stand-alone program.
@@ -16,6 +18,9 @@ Ensure that the [requests](https://requests.readthedocs.io/en/latest/) and [pand
 ```
 pip3 install -r requirements.txt
 ```
+
+---
+
 ## Command line interface
 
 Here is the general usage (you can view this in your command line with `python3 /path/to/PharmDOG/src/pharm_gene_annotator.py -h`):
@@ -35,6 +40,7 @@ options:
 
 The **input file** should be a text file formatted with one gene per line using gene symbol notation. The input file also supports comment lines starting with **#**.
 
+---
 ## Output
 
 The output from [pharm_gene_annotator.py](src/pharm_gene_annotator.py)  is presented as a comma-separated file (CSV) with six columns:
@@ -47,3 +53,15 @@ The output from [pharm_gene_annotator.py](src/pharm_gene_annotator.py)  is prese
 - **Feature_type**: Broad classification of the Feature (e.g., Disease, Chemical...).
 - **Status**: Indicates whether the Feature is associated with the gene or not.
 - **PMIDs**: Identification codes for the evidence supporting the relationship. If multiple, they are separated by ";".
+
+---
+## Test
+Within this repository, input/output files for the **PharmDOG** tool are provided in the [test](test/) folder.
+You can test the tool using:
+```
+pyhon3 src/pharm_gene_annotator.py -i test/input.test.txt -o test/output.test.txt
+```
+---
+## Contributors
+
+[![Contributors figure](https://contrib.rocks/image?repo=SeviJordi/PharmDOG)](https://github.com/SeviJordi/PharmDOG/graphs/contributors)
