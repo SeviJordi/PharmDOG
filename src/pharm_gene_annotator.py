@@ -115,22 +115,25 @@ def main() -> None:
         new_line = f"{gene},"
 
         # Add pharm id
-        new_line += f"{symbol2pharmid[gene]}," if gene in symbol2pharmid else ",,,,"
-
-        # If not pharm id no annotation
-        if symbol2pharmid[gene] not in relationships["Entity1_id"].tolist():
-            new_line += ",,,"
-            
+        if gene not in symbol2pharmid:
+            new_line += ",,,,"
         else:
-            entry = relationships.loc[
-                relationships["Entity1_id"] == symbol2pharmid[gene]
-            ].iloc[0]
-            new_line += "{},{},{},{}".format(
-                entry["Entity2_name"],
-                entry["Entity2_type"],
-                entry["Association"],
-                entry["PMIDs"],
-            )
+            new_line += f"{symbol2pharmid[gene]},"
+
+            # If not pharm id no annotation
+            if symbol2pharmid[gene] not in relationships["Entity1_id"].tolist():
+                new_line += ",,,"
+                
+            else:
+                entry = relationships.loc[
+                    relationships["Entity1_id"] == symbol2pharmid[gene]
+                ].iloc[0]
+                new_line += "{},{},{},{}".format(
+                    entry["Entity2_name"],
+                    entry["Entity2_type"],
+                    entry["Association"],
+                    entry["PMIDs"],
+                )
 
         file_out.append(new_line)
 
