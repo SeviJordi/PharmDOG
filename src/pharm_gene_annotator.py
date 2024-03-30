@@ -10,10 +10,14 @@ from zipfile import ZipFile
 import requests
 import pandas as pd
 from argparse import ArgumentParser
+import os
 
 # URLs to zip files from PharmGKB
 RELATIONSHIP_URL = "https://api.pharmgkb.org/v1/download/file/data/relationships.zip"
 GENES_URL = "https://api.pharmgkb.org/v1/download/file/data/genes.zip"
+CONTAINER_PATH = ".data"
+GENES_NAME = "genes.tsv"
+RELATIONSHIP_NAME = "relationships.tsv"
 
 # Column names
 symbol_col = "Symbol"  # Gene symbol
@@ -53,16 +57,50 @@ def main() -> None:
         genes_list = [line.strip() for line in lines if not line.startswith("#")]
         file_out = [line.strip() for line in lines if line.startswith("#")]
 
-    # Download files from PharmGKB
+    # Download files from PharmGKB if needed
+    pharmdogPath = os.path.dirname(os.path.realpath(__file__))
+
     ## Relationships
-    url = requests.get(RELATIONSHIP_URL)
-    zipfile = ZipFile(BytesIO(url.content))
-    relationships = pd.read_csv(zipfile.open("relationships.tsv"), sep="\t")
+    if not os.path.isfile(f"{pharmdogPath}/{CONTAINER_PATH}/{RELATIONSHIP_NAME}"):
+        url = requests.get(RELATIONSHIP_URL)
+        zipfile = ZipFile(BytesIO(url.content))
+        relationships = pd.read_csv(zipfile.open("relationships.tsv"), sep="\t")
+
+        # save the file
+        if not os.path.isdir(f"{pharmdogPath}/{CONTAINER_PATH}"):
+            os.mkdir(f"{pharmdogPath}/{CONTAINER_PATH}")
+        
+        relationships.to_csv(
+            f"{pharmdogPath}/{CONTAINER_PATH}/{RELATIONSHIP_NAME}",
+            sep="\t"
+        )
+            
+    else:
+        relationships = pd.read_csv(
+            f"{pharmdogPath}/{CONTAINER_PATH}/{RELATIONSHIP_NAME}",
+            sep="\t"
+            )
 
     ## Genes
-    url = requests.get(GENES_URL)
-    zipfile = ZipFile(BytesIO(url.content))
-    genes = pd.read_csv(zipfile.open("genes.tsv"), sep="\t")
+    if not os.path.isfile(f"{pharmdogPath}/{CONTAINER_PATH}/{GENES_NAME}"):
+        url = requests.get(GENES_URL)
+        zipfile = ZipFile(BytesIO(url.content))
+        genes = pd.read_csv(zipfile.open("genes.tsv"), sep="\t")
+
+        # save the file
+        if not os.path.isdir(f"{pharmdogPath}/{CONTAINER_PATH}"):
+            os.mkdir(f"{pharmdogPath}/{CONTAINER_PATH}")
+        
+        genes.to_csv(
+            f"{pharmdogPath}/{CONTAINER_PATH}/{GENES_NAME}",
+            sep="\t"
+        )
+
+    else:
+        genes = pd.read_csv(
+            f"{pharmdogPath}/{CONTAINER_PATH}/{GENES_NAME}",
+            sep="\t"
+            )
 
     symbol2pharmid = {
         symbol: pharmid
@@ -71,7 +109,6 @@ def main() -> None:
         )
     }
   
-
     # Annotate genes
     file_out.append("Gene_Symbol,PharmGKB_id,Feature,Feature_type,Status,PMIDs")
     for gene in genes_list:
