@@ -59,7 +59,7 @@ The output from [pharm_gene_annotator.py](src/pharm_gene_annotator.py)  is prese
 Within this repository, input/output files for the **PharmDOG** tool are provided in the [test](test/) folder.
 You can test the tool using:
 ```
-pyhon3 src/pharm_gene_annotator.py -i test/input.test.txt -o test/output.test.txt
+python3 src/pharm_gene_annotator.py -i test/input.test.txt -o test/output.test.txt
 ```
 ---
 ## Contributors
